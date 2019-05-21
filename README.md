@@ -34,7 +34,7 @@
 Шифрование запроса делается с помошью библиотеки `libsodium`
 
 [Sodium](https://libsodium.gitbook.io/doc) - это современая, легкая в использование проргаммная библиотека для шифрования,
-дшифрования, подписи, хэшированию паролей и другова.
+дшифрования, подписи, хэшированию паролей и другова. На вашем [ЯП](https://libsodium.gitbook.io/doc/bindings_for_other_languages)
 
 Пример на js:
 Сам запрос в формате json:
@@ -67,8 +67,17 @@ let recipientPk = sodium.from_base64("h09acJ8QSLPw40XZxdNfLbq4hXzWInC5zXL319RdXU
 let cipher = sodium.crypto_box_seal(json_string, recipientPk);
 let encrypted = sodium.to_base64(cipher);
 ```
+`encrypted` - строка котороя передется в теле запроса.
 
-`encrypted` - строка котороя передется в теле запроса
+***Внимание!!! Если в вашей `sodium` библиотеке или ее обертке нет функции
+с хешированием в base64. Оберните `cipher` функцией base64 самого ЯП.***
+
+Примеры:
+[php](https://www.php.net/manual/ru/function.base64-encode.php) |
+[rust](https://docs.rs/base64/0.3.1/base64/fn.encode.html) |
+[java](https://docs.oracle.com/javase/8/docs/api/java/util/Base64.Encoder.html) |
+[go](https://golang.org/pkg/encoding/base64) |
+[еще пара](https://www.yeahhub.com/encode-base64-popular-programming-languages/)
 
 ### Создание платежа
 ### Проверка статуса платежа
